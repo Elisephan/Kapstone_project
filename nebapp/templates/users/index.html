@@ -1,0 +1,74 @@
+{%extends "users/base.html"%} {% load static%} {% load bootstrap4 %} {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Lilita+One|Titan+One" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css">
+
+    <title>Houses</title>
+</head>
+
+<body>
+
+    {% block content %}
+    <div style="background-color: rgb(216, 218, 226);">
+        <br><br>
+        <div class="container">
+
+
+            <br>
+            <h1 style="text-align: center;">Discover Your New Home!</h1>
+            <h6 style="text-align:center;">{{date|date:"l d F Y"}}</h6><br>
+
+            <!-- <h5>HHHHHHHHHHHHHHHHHHHHH  FF</h5> -->
+            <h3>Latest Listings</h3><br>
+
+            <a href="{% url 'new-hood'%}">
+                <!-- <button class="btn btn-outline-primary btn-sm">Add a house</button> -->
+            </a>
+            <div class="row">
+                {%for hood in hoods %}
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{hood.name}}</h3>
+                        </div>
+                        <div class="card-image">
+                            <img src="{{hood.image.url}}" class="img-responsive" alt="" style="width: 300px; height: 250px;">
+                        </div>
+
+                        <div class="card-body">
+                            <h4 class="description">Detail: {{hood.description}}</h4>
+                            <h4 class="description">Garage: {{hood.garage}}</h4>
+                            <h4 class="description">Bed rooms: {{hood.bed_rooms}}</h4>
+                            <h4 class="description">Bath rooms: {{hood.bath_rooms}}</h4>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="{%url 'my-hood' hood.id%}"><button class="btn btn-outline-primary btn-sm">Book this house</a>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer>
+            <h4 style="text-align: center; font-style: italic;font-weight: bold;">&copy;2021 Elisephan All rights reserved</h4>
+        </footer>
+    </div>
+    <hr> {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+{%extends "users/base.html"%} {% load staticfiles %} {%load static%} {% load bootstrap4 %} {% block styles%} {{block.super}}
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One|Patua+One|Philosopher" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/neb.css' %}"> {% endblock %} {% block content %}
+<div class="container">
+
+    <div class="row">
+        {% if hood%}
+        <h2>Found {{ hood|length }} of searched term {{message}}</h2>
+        {% else %}
+        <h2> Found 0 houses for the search term {{message}}</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+
+        {% if hood %} {% for hood in hood %}
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{hood.name}}</h3>
+                </div>
+                <div class="card-image">
+                    <img src="{{hood.image.url}}" class="img-responsive" alt="" style="width: 300px; height: 250px;">
+                </div>
+
+                <div class="card-body">
+                    <h4 class="description">Detail: {{hood.description}}</h4>
+                    <h4 class="description">Garage: {{hood.garage}}</h4>
+                    <h4 class="description">Bed rooms: {{hood.bed_rooms}}</h4>
+                    <h4 class="description">Bath rooms: {{hood.bath_rooms}}</h4>
+
+                </div>
+
+                <div class="card-footer">
+                    <a href="{%url 'my-hood' hood.id%}"><button class="btn btn-outline-primary btn-sm">View Detail</a>&nbsp;
+
+
+
+
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% endif %}
+    </div>
+</div>
+{% endblock %}
